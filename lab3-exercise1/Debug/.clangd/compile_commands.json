@@ -1,0 +1,12 @@
+[
+   {
+      "directory" : "/home/mihir/workspace_ccstheia/lab3-exercise1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -I\"/home/mihir/workspace_ccstheia/lab3-exercise1\" -I\"/home/mihir/workspace_ccstheia/lab3-exercise1/Debug\" -I\"/home/mihir/ti/mspm0_sdk_2_05_01_00/source/third_party/CMSIS/Core/Include\" -I\"/home/mihir/ti/mspm0_sdk_2_05_01_00/source\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -xc",
+      "file"      : "/home/mihir/workspace_ccstheia/lab3-exercise1/Debug/ti_msp_dl_config.c"
+   },
+   {
+      "directory" : "/home/mihir/workspace_ccstheia/lab3-exercise1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -I\"/home/mihir/workspace_ccstheia/lab3-exercise1\" -I\"/home/mihir/workspace_ccstheia/lab3-exercise1/Debug\" -I\"/home/mihir/ti/mspm0_sdk_2_05_01_00/source/third_party/CMSIS/Core/Include\" -I\"/home/mihir/ti/mspm0_sdk_2_05_01_00/source\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/home/mihir/CMPE146/CCS_20.2.0.00012_linux/ccs2020/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -xc",
+      "file"      : "/home/mihir/workspace_ccstheia/lab3-exercise1/l3_ex1.c"
+   }
+]

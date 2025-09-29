@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Lab1-exercise3",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "Lab1-exercise3",
+                "resourceId": "/Lab1-exercise3"
+            }
+        },
+        {
+            "name": "lab3-exercise1",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "lab3-exercise1",
+                "resourceId": "/lab3-exercise1"
+            }
+        }
+    ]
+}
