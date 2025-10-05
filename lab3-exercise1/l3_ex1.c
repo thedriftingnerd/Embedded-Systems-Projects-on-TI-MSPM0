@@ -32,10 +32,36 @@
 
 #include "ti_msp_dl_config.h"
 #include <stdio.h>
+#include <stdint.h>
+#define GPIOB_BASE_ADDR ((uint32_t)GPIOB)
+#define DIN2_OFFSET (0x1380+2)
+#define DOUT2_OFFSET (0x1280+2)
+#define S2_BIT (1u<<5)
+#define BLUE_BIT (1u<<6) //still going to make the blue LED light up as a visual indicator for S2 being pressed
+#define BUSCLK_DEFAULT (32000000UL) //in HZ
+#define DEBOUNCE (20U)
+
+static inline uint32_t tick_conversion(uint32_t ms){
+    return (BUSCLK_DEFAULT/1000UL)*ms;
+}
+
+static void delay(uint32_t ms){
+    uint32_t start = DL_Timer_getTimerCount(TIMG12);
+    uint32_t target = tick_conversion(ms);
+    while((uint32_t)(DL_Timer_getTimerCount(TIMG12)-start) < target){__NOP();}
+}
 
 int main(void)
 {
     SYSCFG_DL_init();
+    DL_GPIO_enablePower(GPIOB);
+    DL_GPIO_initDigitalOutput((IOMUX_PINCM50));
+    DL_GPIO_enableOutput(GPIOB, DL_GPIO_PIN_22);
+    DL_GPIO_clearPins(GPIOB, DL_GPIO_PIN_22);
+    DL_GPIO_initPeripheralInputFunctionFeatures(IOMUX_PINCM49, IOMUX_PINCM49_PF_GPIOB_DIO21, DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_PULL_UP, DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+    volatile uint8_t*const DIN2 = (volatile uint8_t*)(GPIOB_BASE_ADDR+DIN2_OFFSET);
+    volatile uint8_t*const DOUT2 = (volatile uint8_t*)(GPIOB_BASE_ADDR+DOUT2_OFFSET);
+    uint8_t one = ((*DIN2 & S2_BIT) ? 1u:0u);
     uint32_t status_pb = DL_GPIO_readPins(GPIOB, DL_GPIO_PIN_21);
     DL_Timer_enablePower(TIMG12);
     DL_Timer_ClockConfig config;
@@ -51,11 +77,31 @@ int main(void)
     timerConfig.counterVal = 0;
     DL_Timer_initTimerMode(TIMG12, &timerConfig);
     uint32_t counter_value = DL_Timer_getTimerCount(TIMG12);
-    
-    
 
-    /*
+    printf("Press the button");
+
+    uint8_t previous = ((*DIN2 & S2_BIT) ? 1u:0u);
+    uint32_t start = 0;
+
     while (1) {
+        uint8_t current = ((*DIN2 & S2_BIT) ? 1u:0u);
+        if(current!=previous){
+            delay(DEBOUNCE);
+            uint8_t confirmation = ((*DIN2 & S2_BIT) ? 1u : 0u);
+            if(confirmation == current){
+                if(previous == 1u && current == 0u){
+                    start = DL_Timer_getTimerCount(TIMG12);
+                    *DOUT2 |= BLUE_BIT;
+                }
+                else if(previous == 0u && current == 1u){
+                    uint32_t end = DL_Timer_getTimerCount(TIMG12);
+                    uint32_t delta = (uint32_t)(end-start);
+                    double time = ((double)delta*1000)/(double)(BUSCLK_DEFAULT);
+                    printf("S2 pressed for %.3f ms (ticks = %lu)\n", time, (unsigned long)delta);
+                    *DOUT2 &= (uint8_t)~BLUE_BIT;
+                }
+                previous = current;
+            }
+        }
     }
-    */
 }
