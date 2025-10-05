@@ -1,6 +1,6 @@
 # FIXED
 
-empty.o: ../empty.c \
+l3_ex1.o: ../l3_ex1.c \
  ti_msp_dl_config.h \
  /home/mihir/ti/mspm0_sdk_2_05_01_00/source/ti/devices/msp/msp.h \
  /home/mihir/ti/mspm0_sdk_2_05_01_00/source/ti/devices/DeviceFamily.h \
